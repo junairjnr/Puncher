@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-:root {
+/* :root {
   --background: #ffffff;
   --foreground: #171717;
 }
@@ -23,4 +23,449 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+@import "tailwindcss";
+
+/* :root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+} */
+/* app/globals.css */
+
+/* @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Patrick+Hand&display=swap'); */
+
+:root {
+  --bg-day: #fffcf2;
+  --bg-night: #0f0f1a;
+  --text-day: #1a1a2e;
+  --text-night: #f0e8ff;
+  --accent: #f3033fe3;
+  --accent-dark: #cc0044;
+  --bubble: #fff176;
+  --bubble-border: #ffb300;
+  --card: #ffffff;
+  --card-night: #1e1e38;
+}
+
+body {
+  margin: 0;
+  font-family: 'Comic Neue', cursive;
+}
+
+.day-mode {
+  background: linear-gradient(135deg, var(--bg-day) 0%, #fff0d9 100%);
+  color: var(--text-day);
+}
+
+.night-mode {
+  background: linear-gradient(180deg, #0a0a14 0%, var(--bg-night) 100%);
+  color: var(--text-night);
+}
+
+.comic-container {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+  position: relative;
+}
+
+.header-comic {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  position: relative;
+}
+
+h1 {
+  font-family: 'Bangers', cursive;
+  font-size: 4.2rem;
+  color: var(--accent);
+  text-shadow: 4px 4px 0 #000, 7px 7px 0 #000;
+  line-height: 0.9;
+  margin: 0.4rem 0;
+  letter-spacing: 2px;
+}
+
+.subtitle {
+  font-size: 1.5rem;
+  color: #555;
+  margin-top: -0.8rem;
+}
+
+.theme-toggle {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: rgba(255,255,255,0.25);
+  border: none;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  font-size: 1.8rem;
+  backdrop-filter: blur(4px);
+}
+
+.comic-input-wrapper {
+  position: relative;
+  margin: 1.1rem 0;
+}
+
+.comic-input {
+  width: 100%;
+  padding: 1.1rem 1.4rem 1.1rem 5.2rem;
+  font-size: 1.35rem;
+  border: 4px solid #000;
+  border-radius: 18px;
+  background: white;
+  font-family: 'Patrick Hand', cursive;
+  box-shadow: 6px 6px 0 #000;
+  transition: all 0.15s;
+}
+
+.comic-input:focus {
+  outline: none;
+  box-shadow: 10px 10px 0 #000;
+  transform: translate(-3px, -3px);
+}
+
+.stamp {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(-12deg);
+  font-family: 'Bangers', cursive;
+  font-size: 2.6rem;
+  color: #e91e63;
+  opacity: 0.85;
+  pointer-events: none;
+}
+
+.speech-bubble {
+  position: relative;
+  background: var(--bubble);
+  border: 5px solid var(--bubble-border);
+  border-radius: 22px;
+  padding: 1.2rem 1.8rem;
+  font-size: 1.45rem;
+  font-weight: bold;
+  margin-bottom: 1.8rem;
+  box-shadow: 6px 6px 0 #000;
+  text-align: center;
+}
+
+.bubble-tail {
+  position: absolute;
+  bottom: -28px;
+  left: 32%;
+  width: 0;
+  height: 0;
+  border-left: 18px solid transparent;
+  border-right: 18px solid transparent;
+  border-top: 28px solid var(--bubble-border);
+}
+
+.btn-add, .btn-calc {
+  font-family: 'Bangers', cursive;
+  font-size: 1.6rem;
+  padding: 0.9rem 1.8rem;
+  margin: 0.8rem 0.5rem;
+  border: 5px solid black;
+  border-radius: 18px;
+  background: #4caf50;
+  color: white;
+  cursor: pointer;
+  box-shadow: 6px 6px 0 black;
+  transition: all 0.15s;
+}
+
+.btn-calc.big {
+  font-size: 2.1rem;
+  padding: 1.3rem 2.6rem;
+  background: var(--accent);
+  margin: 2rem auto;
+  display: block;
+}
+
+.comic-btn:hover {
+  transform: translate(-4px, -4px);
+  box-shadow: 10px 10px 0 black;
+}
+
+.comic-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 3px 3px 0 black;
+}
+
+.loading-dots span {
+  animation: blink 1.4s infinite;
+}
+
+.loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+  0%,100% { opacity: 0.2; }
+  20% { opacity: 1; }
+}
+
+.error-box {
+  background: #ff5252;
+  color: white;
+  padding: 1.4rem;
+  border-radius: 16px;
+  border: 5px solid black;
+  box-shadow: 6px 6px 0 black;
+  font-size: 1.4rem;
+  text-align: center;
+  margin: 1.5rem 0;
+}
+
+.result-panel {
+  width: 100%;
+  background: var(--card);
+  border: 6px solid black;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 8px 8px 0 black;
+  margin-top: 2.5rem;
+}
+
+.night-mode .result-panel {
+  background: var(--card-night);
+}
+
+.result-title {
+  font-family: 'Bangers', cursive;
+  font-size: 3.2rem;
+  color: var(--accent);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  text-shadow: 3px 3px 0 black;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1.4rem;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.7);
+  border: 4px solid black;
+  border-radius: 16px;
+  padding: 1.4rem;
+  text-align: center;
+  box-shadow: 5px 5px 0 black;
+}
+
+.night-mode .stat-card {
+  background: rgba(30,30,56,0.7);
+}
+
+.stat-card.break { background: rgba(255,235,59,0.35); }
+.stat-card.work  { background: rgba(76,175,80,0.35); }
+
+.icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 0.6rem;
+  color: #333;
+}
+
+.value {
+  font-size: 3.2rem;
+  font-weight: bold;
+  font-family: 'Bangers', cursive;
+  color: var(--accent-dark);
+}
+
+.label {
+  font-size: 1.4rem;
+  margin-top: 0.4rem;
+  opacity: 0.9;
+}
+
+.comic-message {
+  font-size: 2.1rem;
+  text-align: center;
+  margin: 2rem 0;
+  font-family: 'Bangers', cursive;
+  color: #ff5722;
+  text-shadow: 2px 2px 0 black;
+}
+
+.raw {
+  background: #00000022;
+  padding: 1.2rem;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  overflow-x: auto;
+  margin-top: 2rem;
+}
+
+.comic-footer {
+  text-align: center;
+  margin-top: 4rem;
+  opacity: 0.7;
+  font-size: 1.1rem;
+}
+
+/* tiny animations */
+.spin-slow  { animation: spin 20s linear infinite; }
+.bounce     { animation: bounce 2.4s infinite; }
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes bounce {
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(-12px); }
+}
+
+
+.deficit-comic {
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.speech-bubble.big.red {
+  background: #ff5252;
+  color: white;
+  border: 6px solid #b71c1c;
+  border-radius: 28px;
+  padding: 1.8rem 2.2rem;
+  font-size: 1.7rem;
+  font-weight: bold;
+  box-shadow: 8px 8px 0 #000;
+  margin: 0 auto 2rem;
+  max-width: 90%;
+  position: relative;
+}
+
+.speech-bubble.big.red::after {
+  content: '';
+  position: absolute;
+  bottom: -28px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 24px solid transparent;
+  border-right: 24px solid transparent;
+  border-top: 28px solid #b71c1c;
+}
+
+.punch-stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+.stat-item {
+  background: rgba(0,0,0,0.07);
+  border: 5px solid #000;
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  min-width: 220px;
+  box-shadow: 6px 6px 0 #000;
+  transition: all 0.2s;
+}
+
+.stat-item:hover {
+  transform: scale(1.08) rotate(2deg);
+}
+
+.deficit .big-number {
+  color: #d32f2f;
+  font-size: 4.8rem;
+  font-family: 'Bangers', cursive;
+  text-shadow: 4px 4px 0 #000;
+}
+
+.target .big-number {
+  color: #388e3c;
+  font-size: 3.8rem;
+  font-family: 'Bangers', cursive;
+}
+
+.target-time {
+  font-size: 2.6rem !important;
+  color: #0288d1 !important;
+}
+
+.icon.shake {
+  animation: shake 2.5s infinite;
+}
+
+.icon.spin {
+  animation: spin 12s linear infinite;
+}
+
+.comic-verdict {
+  font-family: 'Bangers', cursive;
+  font-size: 3.2rem;
+  color: #ff9800;
+  text-shadow: 3px 3px 0 #000;
+  margin: 2rem 0;
+  line-height: 1.1;
+}
+
+.motivation {
+  font-size: 1.0rem;
+  font-style: italic;
+  color: #555;
+  margin-top: 1.5rem;
+}
+
+.raw-debug {
+  margin-top: 3rem;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+@keyframes shake {
+  0%,100% { transform: translateX(0); }
+  25% { transform: translateX(-6px); }
+  75% { transform: translateX(6px); }
+} 
+
+.dancing-bear {
+  font-size: 3.5rem;
+  margin-top: 1.2rem;
+  display: inline-block;
+  animation: bearDance 1s infinite ease-in-out;
+}
+
+@keyframes bearDance {
+  0%   { transform: rotate(0deg) translateY(0); }
+  25%  { transform: rotate(-12deg) translateY(-8px); }
+  50%  { transform: rotate(12deg) translateY(0); }
+  75%  { transform: rotate(-12deg) translateY(-8px); }
+  100% { transform: rotate(0deg) translateY(0); }
 }
