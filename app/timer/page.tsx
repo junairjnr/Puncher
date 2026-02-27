@@ -15,6 +15,9 @@ import {
   BatteryLow,
 } from "lucide-react";
 import TenorGif from "../Components/Bear";
+import toast from "react-hot-toast";
+import Image from "next/image";
+import king from "../assets/_.jpeg"
 
 export default function Timer() {
   const [punchLines, setPunchLines] = useState<string[]>([]);
@@ -29,42 +32,53 @@ export default function Timer() {
   const today = format(new Date(), "dd-MMM-yyyy");
 
   const handleInputChange = (value: string) => {
-    setPunchLines([value]);
+    console.log(value, "value");
+
+    if (!value) {
+      setPunchLines([]);
+       setError(null);
+    } else {
+      setPunchLines([value]);
+    }
   };
 
   const calculate = async () => {
-    const validPunches = punchLines.map((s) => s.trim()).filter(Boolean);
+    if (punchLines.length > -0) {
+      const validPunches = punchLines.map((s) => s.trim()).filter(Boolean);
 
-    const query = validPunches.join(" ");
-    const url = API_BASE + encodeURIComponent(query);
+      const query = validPunches.join(" ");
+      const url = API_BASE + encodeURIComponent(query);
 
-    setLoading(true);
-    setError(null);
-    setResult(null);
+      setLoading(true);
+      setError(null);
+      setResult(null);
 
-    try {
-      const res = await axios.post(url, { timeout: 10000 });
-      setResult(res.data);
-    } catch (err: any) {
-      console.error(err);
-      setError(
-        err.response?.data?.message ||
-          err.message ||
-          "API had a tantrum... try again! 😤"
-      );
-    } finally {
-      setLoading(false);
+      try {
+        const res = await axios.post(url, { timeout: 10000 });
+        setResult(res.data);
+      } catch (err: any) {
+        console.error(err);
+        setError(
+          err.response?.data?.message ||
+            err.message ||
+            "API had a tantrum... try again! 😤"
+        );
+      } finally {
+        setLoading(false);
+      }
+    } else {
+      toast.error("Please Add Punch Data...!");
     }
   };
 
   //   // Auto-fill example on first load
-//   useEffect(() => {
-//     setPunchLines([
-//       `${today} 9:00:00 AM`,
-//       `${today} 1:18:32 PM`,
-//       `${today} 1:46:04 PM`,
-//     ]);
-//   }, []);
+  useEffect(() => {
+    setPunchLines([
+      `${today} 9:00:00 AM`,
+      `${today} 1:18:32 PM`,
+      `${today} 1:46:04 PM`,
+    ]);
+  }, []);
 
   const extractHours = (text: string) => {
     const match = text.match(/(\d+) Hours?/i);
@@ -106,10 +120,10 @@ export default function Timer() {
         </header>
 
         <section className="input-panel">
-          <div className="speech-bubble">
+          {/* <div className="speech-bubble">
             Enter your punches
             <div className="bubble-tail" />
-          </div>
+          </div> */}
 
           <div className="punch-row comic-input-wrapper">
             <textarea
@@ -194,12 +208,14 @@ export default function Timer() {
         )}
 
         <footer className="comic-footer">
-          <div>
-            Made with rage, coffee and Next.js • {new Date().getFullYear()}
-          </div>
-
-          <div className="bear-gif">
+          <div className="bear-gif flex flex-row">
             <TenorGif />
+          <Image alt="" src={king} className="w-75 h-100"/>
+          </div>
+          <div>
+            <p className="text-2xl font-bold">
+              Made with fun, Based on a true story..• {new Date().getFullYear()}
+            </p>
           </div>
         </footer>
       </div>
