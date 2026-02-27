@@ -72,13 +72,13 @@ export default function Timer() {
   };
 
   //   // Auto-fill example on first load
-  useEffect(() => {
-    setPunchLines([
-      `${today} 9:00:00 AM`,
-      `${today} 1:18:32 PM`,
-      `${today} 1:46:04 PM`,
-    ]);
-  }, []);
+//   useEffect(() => {
+//     setPunchLines([
+//       `${today} 9:00:00 AM`,
+//       `${today} 1:18:32 PM`,
+//       `${today} 1:46:04 PM`,
+//     ]);
+//   }, []);
 
   const extractHours = (text: string) => {
     const match = text.match(/(\d+) Hours?/i);
@@ -187,7 +187,7 @@ export default function Timer() {
               {/* Comic-style verdict */}
               <div className="comic-verdict">
                 {parseInt(extractHours(result.data.completionTime), 8) >= 8
-                  ? "8 housr ആയാ ഇറങ്ങി പോടാ നാറി .... 🪄✨"
+                  ? "8 hour ആയാ ഇറങ്ങി പോടാ നാറി .... 🪄✨"
                   : "ക്ഷമിക്കൂ  കുഞ്ഞാടേ,..ഇനിയും  ഇരുന്ന് മൂഞ്ചാനുണ്ട്....💪"}
                 {/* //   : parseInt(extractHours(result.data.completionTime), 8) >= 2
                     ? "ക്ഷമിക്കൂ  കുഞ്ഞാടേ ..ഇനിയും  ഇരുന്ന് മുഞ്ചാനുണ്ട് ....💪" */}
